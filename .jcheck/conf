@@ -1,0 +1,15 @@
+[general]
+project=crac-updates
+jbs=JDK
+version=21.0.4
+
+[checks]
+error=whitespace
+
+[checks "reviewers"]
+committers=1
+ignore=duke
+
+[census]
+version=0
+domain=openjdk.org
