@@ -1,0 +1,18 @@
+Description: Link with -fPIC version of binutils
+ Link against -fPIC binutils library to avoid hard dependency on binutils.
+Author: Vladimir Petko <vladimir.petko@canonical.com>
+Forwarded: not-needed
+Last-Update: 2024-03-19
+--- a/make/autoconf/lib-hsdis.m4
++++ b/make/autoconf/lib-hsdis.m4
+@@ -244,8 +244,8 @@
+   disasm_header="<dis-asm.h>"
+ 
+   if test "x$BINUTILS_INSTALL_DIR" = xsystem; then
+-    AC_CHECK_LIB(bfd, bfd_openr, [ HSDIS_LIBS="-lbfd" ], [ binutils_system_error="libbfd not found" ])
+-    AC_CHECK_LIB(opcodes, disassembler, [ HSDIS_LIBS="$HSDIS_LIBS -lopcodes" ], [ binutils_system_error="libopcodes not found" ])
++    AC_CHECK_LIB(bfd, bfd_openr, [ HSDIS_LIBS="-lbfd_pic -lsframe -lzstd -liberty"  ], [ binutils_system_error="libbfd not found" ])
++    AC_CHECK_LIB(opcodes, disassembler, [ HSDIS_LIBS="$HSDIS_LIBS -lopcodes_pic" ], [ binutils_system_error="libopcodes not found" ])
+     AC_CHECK_LIB(z, deflate, [ HSDIS_LIBS="$HSDIS_LIBS -lz" ], [ binutils_system_error="libz not found" ])
+     # libiberty is not required on Ubuntu
+     AC_CHECK_LIB(iberty, xmalloc, [ HSDIS_LIBS="$HSDIS_LIBS -liberty" ])

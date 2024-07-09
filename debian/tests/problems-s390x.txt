@@ -1,0 +1,7 @@
+# https://bugs.openjdk.org/browse/JDK-8309698
+runtime/NMT/VirtualAllocCommitMerge.java 000000 generic-all
+
+# LingeredApp error
+# java.lang.NoClassDefFoundError: jdk/test/lib/Utils
+serviceability/attach/AttachNegativePidTest.java 000000 generic-all
+

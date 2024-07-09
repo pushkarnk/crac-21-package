@@ -1,0 +1,103 @@
+Running regression tests
+------------------------
+
+Unpack openjdk-N-source package and install the openjdk-N-testsupport
+package.
+
+Change directory to the source package and execute:
+
+  AUTOPKGTEST_TMP=. AUTOPKGTEST_ARTIFACTS=. \
+  ./debian/tests/jtreg-autopkgtest.sh <output-directory> <jtreg options>
+
+to run regression tests.
+
+The script does not set up a GUI environment. Please use
+./debian/tests/jdk-autopkgtest.sh for JDK tests that require a GUI.
+
+Some examples:
+
+- Run specific tests:
+
+    AUTOPKGTEST_TMP=. AUTOPKGTEST_ARTIFACTS=. \
+    ./debian/tests/jtreg-autopkgtest.sh output-dir \
+    -dir:test/hotspot/jtreg/ \
+    sanity/BasicVMTest.java \
+    runtime/6294277/SourceDebugExtension.java
+
+- Run a group of tests (see TEST.groups for definitions):
+
+    AUTOPKGTEST_TMP=. AUTOPKGTEST_ARTIFACTS=. \
+    ./debian/tests/jtreg-autopkgtest.sh output-dir \
+    -dir:test/hotspot/jtreg \
+    :tier1
+
+- Run all tests in the subdirectory:
+
+    AUTOPKGTEST_TMP=. AUTOPKGTEST_ARTIFACTS=. \
+    ./debian/tests/jtreg-autopkgtest.sh output-dir \
+    test/hotspot/jtreg/runtime
+
+  or
+
+    AUTOPKGTEST_TMP=. AUTOPKGTEST_ARTIFACTS=. \
+    ./debian/tests/jtreg-autopkgtest.sh output-dir \
+    -dir:test/hotspot/jtreg/ \
+    runtime
+
+See the jtreg manual page for the overview of jtreg options.
+
+More information is available in OpenJDK documentation[1] and OpenJDK
+developer guide[2].
+
+Running hotspot regression tests
+--------------------------------
+
+Change directory to the source package and execute:
+
+  AUTOPKGTEST_TMP=. AUTOPKGTEST_ARTIFACTS=. \
+  ./debian/tests/hotspot-autopkgtest.sh <jtreg options>
+
+Some examples:
+
+- Run specific tests:
+
+    AUTOPKGTEST_TMP=. AUTOPKGTEST_ARTIFACTS=. \
+    ./debian/tests/hotspot-autopkgtest.sh \
+    sanity/BasicVMTest.java \
+    runtime/6294277/SourceDebugExtension.java
+
+- Run a test group:
+
+    AUTOPKGTEST_TMP=. AUTOPKGTEST_ARTIFACTS=. \
+    ./debian/tests/hotspot-autopkgtest.sh \
+    :tier2
+
+Running the script without any options executes tier1 hotspot tests.
+
+Running jdk regression tests
+----------------------------
+
+Change directory to the source package and execute:
+
+  AUTOPKGTEST_TMP=. AUTOPKGTEST_ARTIFACTS=. \
+  ./debian/tests/jdk-autopkgtest.sh <jtreg options>
+
+Some examples:
+
+- Run specific tests:
+
+    AUTOPKGTEST_TMP=. AUTOPKGTEST_ARTIFACTS=. \
+    ./debian/tests/jdk-autopkgtest.sh \
+    java/lang/Long/GetLong.java \
+    java/lang/Math/TanTests.java
+
+- Run a test group:
+
+    AUTOPKGTEST_TMP=. AUTOPKGTEST_ARTIFACTS=. \
+    ./debian/tests/jdk-autopkgtest.sh \
+    :tier2
+
+Running the script without any options executes tier1 jdk tests.
+
+[1] https://openjdk.org/groups/build/doc/testing.html
+[2] https://openjdk.org/guide/#jtreg

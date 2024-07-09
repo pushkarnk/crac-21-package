@@ -1,0 +1,133 @@
+--- a/src/java.base/share/classes/jdk/internal/util/Architecture.java
++++ b/src/java.base/share/classes/jdk/internal/util/Architecture.java
+@@ -46,6 +46,13 @@
+     LOONGARCH64(64, ByteOrder.LITTLE_ENDIAN),
+     MIPSEL(32, ByteOrder.LITTLE_ENDIAN),
+     MIPS64EL(64, ByteOrder.LITTLE_ENDIAN),
++    ALPHA(64, ByteOrder.LITTLE_ENDIAN),
++    ARC(32, ByteOrder.LITTLE_ENDIAN),
++    HPPA(32, ByteOrder.BIG_ENDIAN),
++    IA64(64, ByteOrder.LITTLE_ENDIAN),
++    M68K(32, ByteOrder.BIG_ENDIAN),
++    SH(32, ByteOrder.LITTLE_ENDIAN),
++    X32(32, ByteOrder.LITTLE_ENDIAN),
+     OTHER(is64bit() ? 64 : 32, ByteOrder.nativeOrder()),
+     PPC(32, ByteOrder.BIG_ENDIAN),
+     PPC64(64, ByteOrder.BIG_ENDIAN),
+@@ -181,6 +188,69 @@
+     }
+ 
+     /**
++     * {@return {@code true} if the current architecture is ALPHA}
++     * Use {@link #isLittleEndian()} to determine big or little endian.
++     */
++    @ForceInline
++    public static boolean isALPHA() {
++        return PlatformProps.TARGET_ARCH_IS_ALPHA;
++    }
++
++    /**
++     * {@return {@code true} if the current architecture is ARC}
++     * Use {@link #isLittleEndian()} to determine big or little endian.
++     */
++    @ForceInline
++    public static boolean isARC() {
++        return PlatformProps.TARGET_ARCH_IS_ARC;
++    }
++
++    /**
++     * {@return {@code true} if the current architecture is HPPA}
++     * Use {@link #isLittleEndian()} to determine big or little endian.
++     */
++    @ForceInline
++    public static boolean isHPPA() {
++        return PlatformProps.TARGET_ARCH_IS_HPPA;
++    }
++
++    /**
++     * {@return {@code true} if the current architecture is IA64}
++     * Use {@link #isLittleEndian()} to determine big or little endian.
++     */
++    @ForceInline
++    public static boolean isIA64() {
++        return PlatformProps.TARGET_ARCH_IS_IA64;
++    }
++
++    /**
++     * {@return {@code true} if the current architecture is X32}
++     * Use {@link #isLittleEndian()} to determine big or little endian.
++     */
++    @ForceInline
++    public static boolean isX32() {
++        return PlatformProps.TARGET_ARCH_IS_X32;
++    }
++
++    /**
++     * {@return {@code true} if the current architecture is SH}
++     * Use {@link #isLittleEndian()} to determine big or little endian.
++     */
++    @ForceInline
++    public static boolean isSH() {
++        return PlatformProps.TARGET_ARCH_IS_SH;
++    }
++
++    /**
++     * {@return {@code true} if the current architecture is M68K}
++     * Use {@link #isLittleEndian()} to determine big or little endian.
++     */
++    @ForceInline
++    public static boolean isM68K() {
++        return PlatformProps.TARGET_ARCH_IS_M68K;
++    }
++
++    /**
+      * {@return {@code true} if the current architecture is ARM}
+      */
+     @ForceInline
+--- a/src/java.base/share/classes/jdk/internal/util/PlatformProps.java.template
++++ b/src/java.base/share/classes/jdk/internal/util/PlatformProps.java.template
+@@ -65,5 +65,12 @@
+     static final boolean TARGET_ARCH_IS_SPARCV9 = "@@OPENJDK_TARGET_CPU@@" == "sparcv9";
+     static final boolean TARGET_ARCH_IS_X86     = "@@OPENJDK_TARGET_CPU@@" == "x86";
+     static final boolean TARGET_ARCH_IS_X64     = "@@OPENJDK_TARGET_CPU@@" == "x64";
++    static final boolean TARGET_ARCH_IS_ALPHA   = "@@OPENJDK_TARGET_CPU@@" == "alpha";
++    static final boolean TARGET_ARCH_IS_ARC     = "@@OPENJDK_TARGET_CPU@@" == "arc";
++    static final boolean TARGET_ARCH_IS_HPPA    = "@@OPENJDK_TARGET_CPU@@" == "hppa";
++    static final boolean TARGET_ARCH_IS_IA64    = "@@OPENJDK_TARGET_CPU@@" == "ia64";
++    static final boolean TARGET_ARCH_IS_M68K    = "@@OPENJDK_TARGET_CPU@@" == "m68k";
++    static final boolean TARGET_ARCH_IS_SH      = "@@OPENJDK_TARGET_CPU@@" == "sh";
++    static final boolean TARGET_ARCH_IS_X32     = "@@OPENJDK_TARGET_CPU@@" == "x32";
+ 
+ }
+--- a/test/jdk/jdk/internal/util/ArchTest.java
++++ b/test/jdk/jdk/internal/util/ArchTest.java
+@@ -41,6 +41,13 @@
+ import static jdk.internal.util.Architecture.SPARCV9;
+ import static jdk.internal.util.Architecture.X64;
+ import static jdk.internal.util.Architecture.X86;
++import static jdk.internal.util.Architecture.ALPHA;
++import static jdk.internal.util.Architecture.ARC;
++import static jdk.internal.util.Architecture.HPPA;
++import static jdk.internal.util.Architecture.IA64;
++import static jdk.internal.util.Architecture.SH;
++import static jdk.internal.util.Architecture.X32;
++import static jdk.internal.util.Architecture.M68K;
+ 
+ import org.junit.jupiter.api.Test;
+ import org.junit.jupiter.params.ParameterizedTest;
+@@ -91,7 +98,14 @@
+                 Arguments.of("sparcv9", SPARCV9, 64, ByteOrder.BIG_ENDIAN, Architecture.isSPARCV9()),
+                 Arguments.of("x64", X64, 64, ByteOrder.LITTLE_ENDIAN, Architecture.isX64()),
+                 Arguments.of("x86", X86, 32, ByteOrder.LITTLE_ENDIAN, Architecture.isX86()),
+-                Arguments.of("x86_64", X64, 64, ByteOrder.LITTLE_ENDIAN, Architecture.isX64())
++                Arguments.of("x86_64", X64, 64, ByteOrder.LITTLE_ENDIAN, Architecture.isX64()),
++                Arguments.of("alpha", ALPHA, 64, ByteOrder.LITTLE_ENDIAN, Architecture.isALPHA()),
++                Arguments.of("arc", ARC, 32, ByteOrder.LITTLE_ENDIAN, Architecture.isARC()),
++                Arguments.of("hppa", HPPA, 32, ByteOrder.BIG_ENDIAN, Architecture.isHPPA()),
++                Arguments.of("ia64", IA64, 64, ByteOrder.LITTLE_ENDIAN, Architecture.isIA64()),
++                Arguments.of("m68k", M68K, 32, ByteOrder.BIG_ENDIAN, Architecture.isM68K()),
++                Arguments.of("sh", SH, 32, ByteOrder.LITTLE_ENDIAN, Architecture.isSH()),
++                Arguments.of("x32", X32, 32, ByteOrder.LITTLE_ENDIAN, Architecture.isX32())
+         );
+     }
+ 

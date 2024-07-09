@@ -1,0 +1,25 @@
+Description: print warning to install openjdk-*-jre package
+ fontmanager support was moved to recommends, warn user to 
+ either install -jre package or recommended packages.
+ Forwarding is not needed as this is a Debian-only issue.
+Author: Vladimir Petko <vladimir.petko@canonical.com>
+Forwarded: not-needed
+
+--- a/src/java.desktop/share/classes/sun/font/FontManagerNativeLibrary.java
++++ b/src/java.desktop/share/classes/sun/font/FontManagerNativeLibrary.java
+@@ -55,7 +55,14 @@
+                           shared library in order to avoid dependency. */
+                    System.loadLibrary("freetype");
+                }
+-               System.loadLibrary("fontmanager");
++
++               try {
++                    System.loadLibrary("fontmanager");
++               } catch (Throwable t) {
++                    System.err.println("Please install the openjdk-*-jre package or recommended packages for openjdk-*-jre-headless.");
++                    throw t;
++               }
++
+ 
+                return null;
+             }

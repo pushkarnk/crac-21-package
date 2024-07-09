@@ -1,0 +1,28 @@
+--- a/make/CompileInterimLangtools.gmk
++++ b/make/CompileInterimLangtools.gmk
+@@ -80,6 +80,16 @@
+ 
+ TARGETS += $(COPY_PREVIEW_FEATURES)
+ 
++$(eval $(call SetupJavaCompilation, COMPILE_PREVIEW_FEATURES, \
++    COMPILER := bootjdk, \
++    TARGET_RELEASE := $(TARGET_RELEASE_BOOTJDK), \
++    EXTRA_FILES := $(TOPDIR)/src/java.base/share/classes/jdk/internal/javac/PreviewFeature.java \
++            $(TOPDIR)/src/java.base/share/classes/jdk/internal/javac/NoPreview.java, \
++    BIN := $(BUILDTOOLS_OUTPUTDIR)/gensrc/java.base.interim/jdk/internal/javac/, \
++))
++
++TARGETS += $(COMPILE_PREVIEW_FEATURES)
++
+ ################################################################################
+ # Setup the rules to build interim langtools, which is compiled by the boot
+ # javac and can be run on the boot jdk. This will be used to compile the rest of
+@@ -118,7 +128,7 @@
+   $1_DEPS_INTERIM := $$(addsuffix .interim, $$(filter \
+       $$(INTERIM_LANGTOOLS_BASE_MODULES), $$(call FindTransitiveDepsForModule, $1)))
+ 
+-  $$(BUILD_$1.interim): $$(foreach d, $$($1_DEPS_INTERIM), $$(BUILD_$$d)) $(COPY_PREVIEW_FEATURES)
++  $$(BUILD_$1.interim): $$(foreach d, $$($1_DEPS_INTERIM), $$(BUILD_$$d)) $(COPY_PREVIEW_FEATURES) $(COMPILE_PREVIEW_FEATURES)
+ 
+   TARGETS += $$(BUILD_$1.interim)
+ endef
