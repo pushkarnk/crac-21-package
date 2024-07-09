@@ -1988,13 +1988,13 @@ endif
 	NO_PKG_MANGLE=1 \
 	dh_builddeb -a $(nodemo) $(nojrez) #$(bd_options)
 
-git_project		= jdk21u
-git_tag			= jdk-21.0.4+6
+git_project		= openjdk-21-crac
+git_tag			= jdk-21.0.4+5
 package_version		= $(shell echo $(PKGVERSION) | sed 's/-[^-][^-]*$$//')
 ifneq ($(is_upstream_release),yes)
   package_version	:= $(subst +,~,$(package_version))
 endif
-git_url			= https://github.com/openjdk/$(git_project)
+git_url			= https://github.com/canonical/$(git_project)
 origdir = ../$(basename)-$(package_version).orig
 topdir = $(basename)-$(package_version)
 gtest_repo = https://github.com/google/googletest
