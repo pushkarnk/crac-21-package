@@ -41,6 +41,7 @@ AC_DEFUN_ONCE([LIB_SETUP_BUNDLED_LIBS],
   LIB_SETUP_ZLIB
   LIB_SETUP_LCMS
   LIB_SETUP_HARFBUZZ
+  LIB_SETUP_PCSCLITE
 ])
 
 ################################################################################
@@ -308,4 +309,42 @@ AC_DEFUN_ONCE([LIB_SETUP_HARFBUZZ],
   AC_SUBST(USE_EXTERNAL_HARFBUZZ)
   AC_SUBST(HARFBUZZ_CFLAGS)
   AC_SUBST(HARFBUZZ_LIBS)
+])
+
+################################################################################
+# Setup pcsclite
+################################################################################
+AC_DEFUN_ONCE([LIB_SETUP_PCSCLITE],
+[
+  AC_ARG_WITH(pcsclite, [AS_HELP_STRING([--with-pcsclite],
+     [use pcsclite from build system or OpenJDK source (system, bundled) @<:@bundled@:>@])])
+
+  AC_MSG_CHECKING([for which pcsclite to use])
+
+  # default is bundled
+  DEFAULT_PCSCLITE=bundled
+  # if user didn't specify, use DEFAULT_PCSCLITE
+  if test "x${with_pcsclite}" = "x"; then
+      with_libpng=${DEFAULT_PCSCLITE}
+  fi
+
+  if test "x${with_pcsclite}" = "xbundled"; then
+      USE_EXTERNAL_PCSCLITE=false
+      AC_MSG_RESULT([bundled])
+  elif test "x${with_pcsclite}" = "xsystem"; then
+      PKG_CHECK_MODULES(PCSCLITE, libpcsclite,
+                   [ PCSCLITE_FOUND=yes ],
+                   [ PCSCLITE_FOUND=no ])
+      if test "x${PCSCLITE_FOUND}" = "xyes"; then
+          USE_EXTERNAL_PCSCLITE=true
+          AC_MSG_RESULT([system])
+      else
+          AC_MSG_RESULT([system not found])
+          AC_MSG_ERROR([--with-pcsclite=system specified, but no pcsclite found!])
+      fi
+  else
+      AC_MSG_ERROR([Invalid value of --with-pcsclite: ${with_pcsclite}, use 'system' or 'bundled'])
+  fi
+
+  AC_SUBST(USE_EXTERNAL_PCSCLITE)
 ])

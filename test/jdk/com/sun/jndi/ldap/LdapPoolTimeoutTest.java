@@ -86,7 +86,9 @@ public class LdapPoolTimeoutTest {
         env.put("com.sun.jndi.ldap.read.timeout", String.valueOf(READ_MILLIS));
         env.put("com.sun.jndi.ldap.connect.timeout", String.valueOf(CONNECT_MILLIS));
         env.put("com.sun.jndi.ldap.connect.pool", "true");
-        env.put(Context.PROVIDER_URL, "ldap://example.com:1234");
+        // there should not be a LDAP provider on multicast address, but
+        // network stack should be able to send to it
+        env.put(Context.PROVIDER_URL, "ldap://224.0.0.0:1234");
 
         try {
             futures.add(executorService.submit(() -> { attemptConnect(env); return null; }));

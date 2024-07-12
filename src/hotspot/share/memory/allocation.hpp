@@ -276,7 +276,7 @@ class CHeapObj {
   void operator delete [] (void* p) {
     CHeapObjBase::operator delete[](p);
   }
-};
+} __attribute__ ((aligned (4)));
 
 // Base class for objects allocated on the stack only.
 // Calling new or delete will result in fatal error.
@@ -415,7 +415,7 @@ class MetaspaceObj {
   // that should be read-only by default. See symbol.hpp for an example. This function
   // is used by the templates in metaspaceClosure.hpp
   static bool is_read_only_by_default() { return false; }
-};
+} __attribute__ ((aligned (4)));
 
 // Base class for classes that constitute name spaces.
 
@@ -526,7 +526,7 @@ protected:
   void print() const;
   virtual void print_on(outputStream* st) const;
 #endif // PRODUCT
-};
+} __attribute__ ((aligned (4)));
 
 // One of the following macros must be used when allocating an array
 // or object to determine whether it should reside in the C heap on in

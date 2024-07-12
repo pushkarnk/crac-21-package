@@ -321,7 +321,7 @@ class oopDesc {
   static void* load_oop_raw(oop obj, int offset);
 
   DEBUG_ONLY(bool size_might_change();)
-};
+} __attribute__ ((aligned (4)));
 
 // An oopDesc is not initialized via a constructor.  Space is allocated in
 // the Java heap, and static functions provided here on HeapWord* are used

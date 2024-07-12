@@ -1810,7 +1810,7 @@ OUTER:  for (int i = 0; i < n; i += m) {
         }
         commentStart = (Csyntax ? "/*" : "//");
         commentEnd = (Csyntax ? " */" : "");
-        commandLineDescription = desc.toString().replace("\\", "\\\\");
+        commandLineDescription = desc.toString().replace("\\", "\\\\").replace(System.getProperty("user.dir").replace("make/gensrc", ""), "");
     }
 
     private static void searchBins(long[] map, int binsOccupied) throws Exception {

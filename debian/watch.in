@@ -1,9 +1,9 @@
 version=4
 opts=\
-repack,repacksuffix=ea,oversionmangle=s/\+(\d+)/\~$1/,dversionmangle=s/\~(\d*)ea$/\+$1/,\
+repack,\
 compression=xz, \
     @git_url@ \
-    (?:.*?/)?jdk-(@shortver@[\+\.\d]*)\.tar\.gz
+    (?:.*?/)?crac-jdk-(21[\+\.\d]*)\.tar\.gz
 
 opts=\
 component=googletest,\

@@ -65,5 +65,12 @@ class PlatformProps {
     static final boolean TARGET_ARCH_IS_SPARCV9 = "@@OPENJDK_TARGET_CPU@@" == "sparcv9";
     static final boolean TARGET_ARCH_IS_X86     = "@@OPENJDK_TARGET_CPU@@" == "x86";
     static final boolean TARGET_ARCH_IS_X64     = "@@OPENJDK_TARGET_CPU@@" == "x64";
+    static final boolean TARGET_ARCH_IS_ALPHA   = "@@OPENJDK_TARGET_CPU@@" == "alpha";
+    static final boolean TARGET_ARCH_IS_ARC     = "@@OPENJDK_TARGET_CPU@@" == "arc";
+    static final boolean TARGET_ARCH_IS_HPPA    = "@@OPENJDK_TARGET_CPU@@" == "hppa";
+    static final boolean TARGET_ARCH_IS_IA64    = "@@OPENJDK_TARGET_CPU@@" == "ia64";
+    static final boolean TARGET_ARCH_IS_M68K    = "@@OPENJDK_TARGET_CPU@@" == "m68k";
+    static final boolean TARGET_ARCH_IS_SH      = "@@OPENJDK_TARGET_CPU@@" == "sh";
+    static final boolean TARGET_ARCH_IS_X32     = "@@OPENJDK_TARGET_CPU@@" == "x32";
 
 }

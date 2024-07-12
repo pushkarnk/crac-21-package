@@ -39,7 +39,7 @@ public class getOriginalHostName {
         SharedSecrets.getJavaNetInetAddressAccess();
 
     public static void main(String[] args) throws Exception {
-        final String HOST = "dummyserver.java.net";
+        final String HOST = "localhost";
         InetAddress ia = null;
         ia = InetAddress.getByName(HOST);
         testInetAddress(ia, HOST);

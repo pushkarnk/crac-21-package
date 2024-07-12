@@ -29,9 +29,14 @@
 # Put the generated Java classes used to interface X11 from awt here.
 GENSRC_X11WRAPPERS_OUTPUTDIR := $(SUPPORT_OUTPUTDIR)/gensrc/java.desktop/sun/awt/X11
 
+GENSRC_X11_VERSION_VARIANT :=
+ifeq ($(OPENJDK_TARGET_OS)-$(OPENJDK_TARGET_CPU), linux-m68k)
+  GENSRC_X11_VERSION_VARIANT := -linux-m68k
+endif
+
 # The pre-calculated offset file are stored here:
 GENSRC_X11WRAPPERS_DATADIR := $(MODULE_SRC)/unix/data/x11wrappergen
-GENSRC_X11WRAPPERS_DATA := $(GENSRC_X11WRAPPERS_DATADIR)/sizes-$(OPENJDK_TARGET_CPU_BITS).txt
+GENSRC_X11WRAPPERS_DATA := $(GENSRC_X11WRAPPERS_DATADIR)/sizes-$(OPENJDK_TARGET_CPU_BITS)$(GENSRC_X11_VERSION_VARIANT).txt
 
 # Run the tool on the offset files to generate several Java classes used in awt.
 $(eval $(call SetupExecute, gen_x11wrappers, \

@@ -46,6 +46,13 @@ public enum Architecture {
     LOONGARCH64(64, ByteOrder.LITTLE_ENDIAN),
     MIPSEL(32, ByteOrder.LITTLE_ENDIAN),
     MIPS64EL(64, ByteOrder.LITTLE_ENDIAN),
+    ALPHA(64, ByteOrder.LITTLE_ENDIAN),
+    ARC(32, ByteOrder.LITTLE_ENDIAN),
+    HPPA(32, ByteOrder.BIG_ENDIAN),
+    IA64(64, ByteOrder.LITTLE_ENDIAN),
+    M68K(32, ByteOrder.BIG_ENDIAN),
+    SH(32, ByteOrder.LITTLE_ENDIAN),
+    X32(32, ByteOrder.LITTLE_ENDIAN),
     OTHER(is64bit() ? 64 : 32, ByteOrder.nativeOrder()),
     PPC(32, ByteOrder.BIG_ENDIAN),
     PPC64(64, ByteOrder.BIG_ENDIAN),
@@ -178,6 +185,69 @@ public enum Architecture {
     @ForceInline
     public static boolean isPPC64LE() {
         return PlatformProps.TARGET_ARCH_IS_PPC64LE;
+    }
+
+    /**
+     * {@return {@code true} if the current architecture is ALPHA}
+     * Use {@link #isLittleEndian()} to determine big or little endian.
+     */
+    @ForceInline
+    public static boolean isALPHA() {
+        return PlatformProps.TARGET_ARCH_IS_ALPHA;
+    }
+
+    /**
+     * {@return {@code true} if the current architecture is ARC}
+     * Use {@link #isLittleEndian()} to determine big or little endian.
+     */
+    @ForceInline
+    public static boolean isARC() {
+        return PlatformProps.TARGET_ARCH_IS_ARC;
+    }
+
+    /**
+     * {@return {@code true} if the current architecture is HPPA}
+     * Use {@link #isLittleEndian()} to determine big or little endian.
+     */
+    @ForceInline
+    public static boolean isHPPA() {
+        return PlatformProps.TARGET_ARCH_IS_HPPA;
+    }
+
+    /**
+     * {@return {@code true} if the current architecture is IA64}
+     * Use {@link #isLittleEndian()} to determine big or little endian.
+     */
+    @ForceInline
+    public static boolean isIA64() {
+        return PlatformProps.TARGET_ARCH_IS_IA64;
+    }
+
+    /**
+     * {@return {@code true} if the current architecture is X32}
+     * Use {@link #isLittleEndian()} to determine big or little endian.
+     */
+    @ForceInline
+    public static boolean isX32() {
+        return PlatformProps.TARGET_ARCH_IS_X32;
+    }
+
+    /**
+     * {@return {@code true} if the current architecture is SH}
+     * Use {@link #isLittleEndian()} to determine big or little endian.
+     */
+    @ForceInline
+    public static boolean isSH() {
+        return PlatformProps.TARGET_ARCH_IS_SH;
+    }
+
+    /**
+     * {@return {@code true} if the current architecture is M68K}
+     * Use {@link #isLittleEndian()} to determine big or little endian.
+     */
+    @ForceInline
+    public static boolean isM68K() {
+        return PlatformProps.TARGET_ARCH_IS_M68K;
     }
 
     /**

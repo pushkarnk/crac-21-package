@@ -8443,7 +8443,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              *    <code>null</code>
              */
             public AccessibleSelection getAccessibleSelection() {
-                return getCurrentAccessibleContext().getAccessibleSelection();
+                AccessibleContext ac = getCurrentAccessibleContext();
+                if (ac != null) {
+		    return ac.getAccessibleSelection();
+                } else {
+                    return null;
+                }
             }
 
             /**
@@ -8453,7 +8458,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * @return the <code>AccessibleText</code>, or <code>null</code>
              */
             public AccessibleText getAccessibleText() {
-                return getCurrentAccessibleContext().getAccessibleText();
+                AccessibleContext ac = getCurrentAccessibleContext();
+                if (ac != null) {
+		    return ac.getAccessibleText();
+                } else {
+                    return null;
+                }
             }
 
             /**
@@ -8463,7 +8473,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * @return the <code>AccessibleValue</code>, or <code>null</code>
              */
             public AccessibleValue getAccessibleValue() {
-                return getCurrentAccessibleContext().getAccessibleValue();
+                AccessibleContext ac = getCurrentAccessibleContext();
+                if (ac != null) {
+		    return ac.getAccessibleValue();
+                } else {
+                    return null;
+                }
             }
 
 
@@ -9223,7 +9238,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * @return the <code>AccessibleAction</code>, or <code>null</code>
              */
             public AccessibleAction getAccessibleAction() {
-                return getCurrentAccessibleContext().getAccessibleAction();
+                AccessibleContext ac = getCurrentAccessibleContext();
+                if (ac != null) {
+		    return ac.getAccessibleAction();
+                } else {
+                    return null;
+                }
             }
 
             /**
@@ -9245,7 +9265,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              *    <code>null</code>
              */
             public AccessibleSelection getAccessibleSelection() {
-                return getCurrentAccessibleContext().getAccessibleSelection();
+                AccessibleContext ac = getCurrentAccessibleContext();
+                if (ac != null) {
+		    return ac.getAccessibleSelection();
+                } else {
+                    return null;
+                }
             }
 
             /**
@@ -9255,7 +9280,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * @return the <code>AccessibleText</code>, or <code>null</code>
              */
             public AccessibleText getAccessibleText() {
-                return getCurrentAccessibleContext().getAccessibleText();
+                AccessibleContext ac = getCurrentAccessibleContext();
+                if (ac != null) {
+		    return ac.getAccessibleText();
+                } else {
+                    return null;
+                }
             }
 
             /**
@@ -9265,7 +9295,12 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
              * @return the <code>AccessibleValue</code>, or <code>null</code>
              */
             public AccessibleValue getAccessibleValue() {
-                return getCurrentAccessibleContext().getAccessibleValue();
+                AccessibleContext ac = getCurrentAccessibleContext();
+                if (ac != null) {
+		    return ac.getAccessibleValue();
+                } else {
+                    return null;
+                }
             }
 
 

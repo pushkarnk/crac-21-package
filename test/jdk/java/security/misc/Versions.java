@@ -55,12 +55,7 @@ public class Versions {
                         Pattern.compile("list/(?<n>[0-9a-f]+)/public_suffix_list.dat"),
                         "src/java.base/share/legal/public_suffix.md",
                         Pattern.compile("list/(?<n>[0-9a-f]+)/public_suffix_list.dat"),
-                        "java.base/public_suffix.md"},
-                {"src/java.smartcardio/unix/native/libj2pcsc/MUSCLE/pcsclite.h",
-                        Pattern.compile("#define PCSCLITE_VERSION_NUMBER +\"(?<n>[0-9\\.]+)\""),
-                        "src/java.smartcardio/unix/legal/pcsclite.md",
-                        Pattern.compile("## PC/SC Lite v(?<n>[0-9\\.]+)"),
-                        "java.smartcardio/pcsclite.md"}
+                        "java.base/public_suffix.md"}
         };
     }
 

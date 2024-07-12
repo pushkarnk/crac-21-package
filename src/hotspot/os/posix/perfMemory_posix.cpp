@@ -38,6 +38,7 @@
 #include "runtime/perfMemory.hpp"
 #include "services/memTracker.hpp"
 #include "utilities/exceptions.hpp"
+#include "os_posix.hpp"
 #if defined(LINUX)
 #include "os_linux.hpp"
 #endif

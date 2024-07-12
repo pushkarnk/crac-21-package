@@ -6636,7 +6636,7 @@ public final class AccessBridge {
         public AccessibleSelection getAccessibleSelection() {
             AccessibleContext ac = getCurrentAccessibleContext();
             if (ac != null && isLeaf) {
-                return getCurrentAccessibleContext().getAccessibleSelection();
+                return ac.getAccessibleSelection();
             } else {
                 return this;
             }
@@ -6651,7 +6651,7 @@ public final class AccessBridge {
         public AccessibleText getAccessibleText() {
             AccessibleContext ac = getCurrentAccessibleContext();
             if (ac != null) {
-                return getCurrentAccessibleContext().getAccessibleText();
+                return ac.getAccessibleText();
             } else {
                 return null;
             }
@@ -6666,7 +6666,7 @@ public final class AccessBridge {
         public AccessibleValue getAccessibleValue() {
             AccessibleContext ac = getCurrentAccessibleContext();
             if (ac != null) {
-                return getCurrentAccessibleContext().getAccessibleValue();
+                return ac.getAccessibleValue();
             } else {
                 return null;
             }

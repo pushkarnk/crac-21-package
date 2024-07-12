@@ -495,6 +495,6 @@ private:
 
   // Verify
   void verify_on(outputStream* st);
-};
+} __attribute__ ((aligned (4)));
 
 #endif // SHARE_OOPS_CONSTMETHOD_HPP

@@ -61,7 +61,7 @@ public:
     ASSERT_TRUE(MetaspaceObj::is_valid(p));
 
     // A misaligned object shall not be recognized
-    const MetaspaceObj* p_misaligned = (MetaspaceObj*)((address)p) + 1;
+    const MetaspaceObj* p_misaligned = (MetaspaceObj*)((address)p + 1);
     ASSERT_FALSE(MetaspaceObj::is_valid(p_misaligned));
 
     // Test VirtualSpaceList::contains
@@ -72,7 +72,7 @@ public:
     ASSERT_TRUE(vslist->contains((MetaWord*)p));
 
     // A misaligned pointer shall still be recognized by list::contains
-    ASSERT_TRUE(vslist->contains((MetaWord*)((address)p) + 1));
+    ASSERT_TRUE(vslist->contains((MetaWord*)((address)p + 1)));
 
     // Now for some bogus values
     ASSERT_FALSE(MetaspaceObj::is_valid((MetaspaceObj*)NULL));

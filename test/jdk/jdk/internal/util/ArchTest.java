@@ -41,6 +41,13 @@ import static jdk.internal.util.Architecture.S390;
 import static jdk.internal.util.Architecture.SPARCV9;
 import static jdk.internal.util.Architecture.X64;
 import static jdk.internal.util.Architecture.X86;
+import static jdk.internal.util.Architecture.ALPHA;
+import static jdk.internal.util.Architecture.ARC;
+import static jdk.internal.util.Architecture.HPPA;
+import static jdk.internal.util.Architecture.IA64;
+import static jdk.internal.util.Architecture.SH;
+import static jdk.internal.util.Architecture.X32;
+import static jdk.internal.util.Architecture.M68K;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -91,7 +98,14 @@ public class ArchTest {
                 Arguments.of("sparcv9", SPARCV9, 64, ByteOrder.BIG_ENDIAN, Architecture.isSPARCV9()),
                 Arguments.of("x64", X64, 64, ByteOrder.LITTLE_ENDIAN, Architecture.isX64()),
                 Arguments.of("x86", X86, 32, ByteOrder.LITTLE_ENDIAN, Architecture.isX86()),
-                Arguments.of("x86_64", X64, 64, ByteOrder.LITTLE_ENDIAN, Architecture.isX64())
+                Arguments.of("x86_64", X64, 64, ByteOrder.LITTLE_ENDIAN, Architecture.isX64()),
+                Arguments.of("alpha", ALPHA, 64, ByteOrder.LITTLE_ENDIAN, Architecture.isALPHA()),
+                Arguments.of("arc", ARC, 32, ByteOrder.LITTLE_ENDIAN, Architecture.isARC()),
+                Arguments.of("hppa", HPPA, 32, ByteOrder.BIG_ENDIAN, Architecture.isHPPA()),
+                Arguments.of("ia64", IA64, 64, ByteOrder.LITTLE_ENDIAN, Architecture.isIA64()),
+                Arguments.of("m68k", M68K, 32, ByteOrder.BIG_ENDIAN, Architecture.isM68K()),
+                Arguments.of("sh", SH, 32, ByteOrder.LITTLE_ENDIAN, Architecture.isSH()),
+                Arguments.of("x32", X32, 32, ByteOrder.LITTLE_ENDIAN, Architecture.isX32())
         );
     }
 

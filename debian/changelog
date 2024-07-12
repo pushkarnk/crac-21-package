@@ -1,5 +1,5 @@
-openjdk-21-crac (21.0.4+5-1) oracular; urgency=medium
+openjdk-21-crac (21.0.4+5-1ppa3) oracular; urgency=medium
 
-  * Initial release. (Closes: #XXXXXX)
+  * Initial release. (LP: #123456)
 
  -- Pushkar Kulkarni <pushkar.kulkarni@canonical.com>  Tue, 09 Jul 2024 18:18:29 +0530

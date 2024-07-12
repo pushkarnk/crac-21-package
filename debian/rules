@@ -21,7 +21,7 @@ endif
 
 vafilt = $(subst $(2)=,,$(filter $(2)=%,$(1)))
 
-DEB_BUILD_OPTIONS       := nodoc nobootcycle
+DEB_BUILD_OPTIONS       := nobootcycle
 DPKG_VARS		:= $(shell dpkg-architecture)
 DEB_HOST_GNU_TYPE	?= $(call vafilt,$(DPKG_VARS),DEB_HOST_GNU_TYPE)
 DEB_BUILD_GNU_TYPE	?= $(call vafilt,$(DPKG_VARS),DEB_BUILD_GNU_TYPE)
@@ -83,8 +83,8 @@ else
   is_default = yes
 endif
 
-is_upstream_release = yes
 is_upstream_release =
+is_upstream_release = yes
 
 srcdir		= .
 builddir	= build
@@ -93,7 +93,7 @@ zbuilddir	= build-zero
 VENDOR		= openjdk
 Vendor		= OpenJDK
 TOP		= usr/lib/jvm
-origin		= crac 
+origin		= openjdk-crac
 basename	= openjdk-$(shortver)-crac
 ifneq (,$(filter $(DEB_HOST_ARCH), $(hotspot_archs)))
   priority	= $(if $(filter yes, $(is_default)),2111,2109)
@@ -347,9 +347,9 @@ ifeq (,$(filter $(DEB_HOST_ARCH), $(hotspot_archs) ia64 powerpc))
   CONFIGURE_ARGS += --with-alt-jar=/usr/bin/fastjar
 endif
 
-ifeq (,$(filter $(DEB_HOST_ARCH), $(hotspot_archs)))
-  CONFIGURE_ARGS += --enable-zero
-endif
+#ifeq (,$(filter $(DEB_HOST_ARCH), $(hotspot_archs)))
+#  CONFIGURE_ARGS += --enable-zero
+#endif
 
 ifeq (,$(filter $(DEB_BUILD_OPTIONS), terse))
   #EXTRA_BUILD_ENV += MAKE_VERBOSE=y QUIETLY= LOG=debug

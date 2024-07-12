@@ -1143,7 +1143,12 @@ public class JTableHeader extends JComponent implements TableColumnModelListener
             }
 
             public AccessibleAction getAccessibleAction() {
-                return getCurrentAccessibleContext().getAccessibleAction();
+                AccessibleContext ac = getCurrentAccessibleContext();
+                if (ac != null) {
+			return ac.getAccessibleAction();
+		} else {
+			return null;
+		}
             }
 
            /**
@@ -1159,15 +1164,30 @@ public class JTableHeader extends JComponent implements TableColumnModelListener
             }
 
             public AccessibleSelection getAccessibleSelection() {
-                return getCurrentAccessibleContext().getAccessibleSelection();
+                AccessibleContext ac = getCurrentAccessibleContext();
+                if (ac != null) {
+			return ac.getAccessibleSelection();
+		} else {
+			return null;
+		}
             }
 
             public AccessibleText getAccessibleText() {
-                return getCurrentAccessibleContext().getAccessibleText();
+                AccessibleContext ac = getCurrentAccessibleContext();
+                if (ac != null) {
+			return ac.getAccessibleText();
+		} else {
+			return null;
+		}
             }
 
             public AccessibleValue getAccessibleValue() {
-                return getCurrentAccessibleContext().getAccessibleValue();
+                AccessibleContext ac = getCurrentAccessibleContext();
+                if (ac != null) {
+			return ac.getAccessibleValue();
+		} else {
+			return null;
+		}
             }
 
 

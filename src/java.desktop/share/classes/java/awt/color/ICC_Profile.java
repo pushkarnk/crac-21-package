@@ -1316,9 +1316,6 @@ public sealed class ICC_Profile implements Serializable
                 dir = st.nextToken();
                 fullPath = dir + File.separatorChar + fileName;
                 f = new File(fullPath);
-                if (!isChildOf(f, dir)) {
-                    f = null;
-                }
             }
         }
 

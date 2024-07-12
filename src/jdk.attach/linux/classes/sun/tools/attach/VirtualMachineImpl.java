@@ -210,11 +210,8 @@ public class VirtualMachineImpl extends HotSpotVirtualMachine {
     }
 
     // Return the socket file for the given process.
-    private File findSocketFile(int pid, int ns_pid) {
-        // A process may not exist in the same mount namespace as the caller.
-        // Instead, attach relative to the target root filesystem as exposed by
-        // procfs regardless of namespaces.
-        String root = "/proc/" + pid + "/root/" + tmpdir;
+    private File findSocketFile(int pid, int ns_pid) throws IOException {
+        String root = findTargetProcessTmpDirectory(pid, ns_pid);
         return new File(root, ".java_pid" + ns_pid);
     }
 
@@ -230,19 +227,31 @@ public class VirtualMachineImpl extends HotSpotVirtualMachine {
             // Do not canonicalize the file path, or we will fail to attach to a VM in a container.
             f.createNewFile();
         } catch (IOException x) {
-            String root;
-            if (pid != ns_pid) {
-                // A process may not exist in the same mount namespace as the caller.
-                // Instead, attach relative to the target root filesystem as exposed by
-                // procfs regardless of namespaces.
-                root = "/proc/" + pid + "/root/" + tmpdir;
-            } else {
-                root = tmpdir;
-            }
+            String root = findTargetProcessTmpDirectory(pid, ns_pid);
             f = new File(root, fn);
             f.createNewFile();
         }
         return f;
+    }
+
+    private String findTargetProcessTmpDirectory(int pid, int ns_pid) throws IOException {
+        String root;
+        if (pid != ns_pid) {
+            // A process may not exist in the same mount namespace as the caller.
+            // Instead, attach relative to the target root filesystem as exposed by
+            // procfs regardless of namespaces.
+            String procRootDirectory = "/proc/" + pid + "/root";
+            if (!Files.isReadable(Path.of(procRootDirectory))) {
+                throw new IOException(
+                        String.format("Unable to access root directory %s " +
+                          "of target process %d", procRootDirectory, pid));
+            }
+
+            root = procRootDirectory + "/" + tmpdir;
+        } else {
+            root = tmpdir;
+        }
+        return root;
     }
 
     /*

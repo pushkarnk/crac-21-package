@@ -1,2 +1,5 @@
 # servicability tests doing symbol lookups
 @basename@-testsupport: unstripped-binary-or-object
+
+# Seems like a false flag
+@basename@-testsupport binary: arch-dependent-file-not-in-arch-specific-directory

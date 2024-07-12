@@ -207,14 +207,21 @@ public class LogGeneratedClassesTest {
 
     @Test
     public void testDumpDirNotWritable() throws Exception {
-        if (!Files.getFileStore(Paths.get("."))
-                  .supportsFileAttributeView(PosixFileAttributeView.class)) {
-            // No easy way to setup readonly directory without POSIX
-            // We would like to skip the test with a cause with
-            //     throw new SkipException("Posix not supported");
-            // but jtreg will report failure so we just pass the test
-            // which we can look at if jtreg changed its behavior
-            System.out.println("WARNING: POSIX is not supported. Skipping testDumpDirNotWritable test.");
+        try
+        {
+            if (!Files.getFileStore(Paths.get("."))
+            .supportsFileAttributeView(PosixFileAttributeView.class)) {
+                // No easy way to setup readonly directory without POSIX
+                // We would like to skip the test with a cause with
+                //     throw new SkipException("Posix not supported");
+                // but jtreg will report failure so we just pass the test
+                // which we can look at if jtreg changed its behavior
+                System.out.println("WARNING: POSIX is not supported. Skipping testDumpDirNotWritable test.");
+                return;
+            }
+        }
+        catch (Throwable t) {
+            System.out.println("WARNING: Mount point not found (JDK-8166162). Skipping testDumpDirNotWritable test.");
             return;
         }
 

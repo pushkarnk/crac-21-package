@@ -156,9 +156,10 @@ public class GenModuleInfoSource {
                 if (l.trim().startsWith("module ")) {
                     if (debug) {
                         // print URI rather than file path to avoid escape
-                        writer.format("    // source file: %s%n", sourceFile.toUri());
+			String buildPath = System.getProperty("user.dir").replaceAll("make$", "");
+			writer.format("    // source file: %s%n", sourceFile.toUri().toString().replace(buildPath, ""));
                         for (Path file : extraFiles) {
-                            writer.format("    //              %s%n", file.toUri());
+			    writer.format("    //              %s%n", file.toUri().toString().replace(buildPath, ""));
                         }
                     }
                     break;

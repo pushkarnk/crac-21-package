@@ -55,7 +55,14 @@ public class FontManagerNativeLibrary {
                           shared library in order to avoid dependency. */
                    System.loadLibrary("freetype");
                }
-               System.loadLibrary("fontmanager");
+
+               try {
+                    System.loadLibrary("fontmanager");
+               } catch (Throwable t) {
+                    System.err.println("Please install the openjdk-*-jre package or recommended packages for openjdk-*-jre-headless.");
+                    throw t;
+               }
+
 
                return null;
             }

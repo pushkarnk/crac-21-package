@@ -273,14 +273,14 @@ public class XDataTransferer extends DataTransferer {
              BufferedReader reader = new BufferedReader(isr)) {
             String line;
             ArrayList<URI> uriList = new ArrayList<>();
-            URI uri;
             while ((line = reader.readLine()) != null) {
                 try {
-                    uri = new URI(line);
+                    if (!"\0".equals(line)) {
+                        uriList.add(new URI(line));
+                    }
                 } catch (URISyntaxException uriSyntaxException) {
                     throw new IOException(uriSyntaxException);
                 }
-                uriList.add(uri);
             }
             return uriList.toArray(new URI[uriList.size()]);
         }

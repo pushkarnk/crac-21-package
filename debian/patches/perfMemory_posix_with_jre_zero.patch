@@ -1,0 +1,16 @@
+Description: fix a jre-zero build failure
+  This issue has been fixed upstream and hence the
+  patch need not be forwarded.
+Author: Pushkar Kulkarni <pushkar.kulkarni@canonical.com> 
+Forwarded: not-needed
+
+--- a/src/hotspot/os/posix/perfMemory_posix.cpp
++++ b/src/hotspot/os/posix/perfMemory_posix.cpp
+@@ -38,6 +38,7 @@
+ #include "runtime/perfMemory.hpp"
+ #include "services/memTracker.hpp"
+ #include "utilities/exceptions.hpp"
++#include "os_posix.hpp"
+ #if defined(LINUX)
+ #include "os_linux.hpp"
+ #endif
